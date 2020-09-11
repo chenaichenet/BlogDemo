@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:replace="${title}">头文件集合</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <!--自定义CSS-->
+    <link rel="stylesheet" th:href="@{/css/my.css}" href="../static/css/my.css"/>
+    <!-- 文本格式 -->
+    <link rel="stylesheet" th:href="@{/css/typo.css}" href="../static/css/typo.css">
+    <!-- 目录生成 -->
+    <link rel="stylesheet" th:href="@{/lib/tocbot/tocbot.css}" href="../static/lib/tocbot/tocbot.css">
+    <!--markdown插件-->
+    <link rel="stylesheet" th:href="@{/lib/editormd/css/editormd.min.css}" href="../static/lib/editormd/css/editormd.min.css">
+
+    <link rel="icon" href="../../static/images/favicon.ico" th:href="@{/images/favicon.ico}">
+</head>
+<body>
+<!--此文件提出了公共部分，具体演示在index中有演示-->
+
+<!-- 导航 -->
+<nav th:fragment="menu(n)" class="ui inverted segment m-padded-tb-mini">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h1 class="ui teal header item">ChenetBlog</h1>
+            <a href="#" th:href="@{/index}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>首页</a>
+            <a href="#" th:href="@{/types}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a><!-- filter icon -->
+<!--            <a href="#" th:href="@{/tags}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>-->
+            <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="clone icon"></i>归档</a>
+            <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
+            <div class="m-item right item m-mobile-hide">
+                <form name="search" action="#" th:action="@{/search}" method="post" >
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" name="query" placeholder="Search..." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="menu toggle ui black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--底部-->
+<footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-large-half">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <img th:src="@{/images/qq.jpg}" src="../static/images/qq.jpg" class="ui rounded image centered" alt="" style="width: 8em;">
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list" th:each="blog:${recommendBlogs}">
+                    <a href="#" class="item" th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}">Java学习路线</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email:chenaichenet@yeah.net</a>
+                    <a href="#" class="item">QQ:1950679747</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">关于</h4>
+                <p class="m-text-thin m-text-spaced m-opaciby-mini">
+                    个人博客。
+                    意在分享学习中的所想所得。欢迎访问~
+                </p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opaciby-tiny"><i class="copyright outline icon"></i> 2020 - 2021
+            ChenetBlog
+            by ChenetChen</p>
+    </div>
+</footer>
+
+</body>
+</html>

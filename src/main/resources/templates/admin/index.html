@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>博客管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/my.css}" href="../../static/css/my.css"/>
+
+    <link rel="icon" href="../../static/images/favicon.ico" th:href="@{/images/favicon.ico}">
+</head>
+<body>
+<!-- 导航 -->
+<nav class="ui inverted segment m-padded-tb-mini">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h1 class="ui teal header item">管理后台</h1>
+            <a href="#" th:href="@{/admin/blogs}" class="item m-item m-mobile-hide"><i class="home icon"></i>博客</a>
+            <a href="#" th:href="@{/admin/types}" class="item m-item m-mobile-hide"><i class="idea icon"></i>分类</a><!-- filter icon -->
+            <div class="right menu m-item m-mobile-hide">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img th:src="@{/images/me.jpg}" src="../../static/images/me.jpg" class="ui avatar image">
+                        Chenet
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="menu toggle ui black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="" class="item">发布</a>
+            <a href="" class="item active teal">列表</a>
+        </div>
+    </div>
+</div>
+
+<!-- 中间内容 -->
+<div class=" m-container m-padded-tb-large">
+    <div class="ui container">
+        <div class="ui success message large">
+            <h2>Hi</h2>
+            <img th:src="@{/images/hello.jpg}" src="../../static/images/hello.jpg" class="ui image">
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+<!-- 底部 -->
+<footer class="ui inverted vertical segment m-padded-tb-large-half">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <img th:src="@{/images/qq.jpg}" src="../../static/images/qq.jpg" class="ui rounded image centered" alt="" style="width: 8em;">
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list" th:each="blog:${recommendBlogs}">
+                    <a href="#" class="item" th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}">Java学习路线</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email:chenaichenet@yeah.net</a>
+                    <a href="#" class="item">QQ:1950679747</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">关于</h4>
+                <p class="m-text-thin m-text-spaced m-opaciby-mini">个人博客</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opaciby-tiny"><i class="copyright outline icon"></i> 2020 - 2021
+            ChenetBlog
+            by ChenetChen</p>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script>
+    /* 通过按钮中的class值定位到按钮 */
+    $('.menu.toggle').click(function () {
+        /* 点击去除m-mobile-hide样式 */
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+</script>
+</body>
+</html>
